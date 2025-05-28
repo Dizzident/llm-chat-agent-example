@@ -1,0 +1,42 @@
+name: Build and Test Application
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install Client Dependencies
+      run: npm ci --prefix client
+
+    - name: Build Client
+      run: npm run build --prefix client
+
+    - name: Test Client
+      run: npm test --prefix client -- --watchAll=false
+
+    - name: Install Server Dependencies
+      run: npm ci --prefix server
+
+    - name: Build Server
+      run: npm run build --prefix server
+
+    - name: Test Server
+      run: npm test --prefix server

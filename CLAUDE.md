@@ -4,21 +4,60 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Status
 
-This is a newly initialized repository for an LLM chat agent example project. The codebase is currently empty and awaiting initial implementation.
+This is a Human-Powered Chatbot Application that allows two users to simulate a chatbot interaction via WebSockets.
 
 ## Current Configuration
 
 - Git repository initialized
-- Claude permissions configured to allow `find` and `ls` bash commands (see `.claude/settings.local.json`)
+- Claude permissions configured to allow `find`, `ls`, and `mkdir` bash commands (see `.claude/settings.local.json`)
+- Full-stack TypeScript application with React frontend and Node.js backend
 
 ## Development Setup
 
-*To be documented once the project structure is established*
+1. Install dependencies:
+   ```bash
+   # Client
+   cd client && npm install
+   
+   # Server
+   cd server && npm install
+   ```
+
+2. Run development servers:
+   ```bash
+   # Terminal 1 - Server (port 8080)
+   cd server && npm run dev
+   
+   # Terminal 2 - Client (port 3000)
+   cd client && npm start
+   ```
 
 ## Commands
 
-*To be documented once build/test/lint tools are configured*
+### Client Commands
+- `npm start` - Start development server
+- `npm run build` - Build for production
+- `npm test` - Run tests
+
+### Server Commands
+- `npm run dev` - Start development server with nodemon
+- `npm run build` - Compile TypeScript
+- `npm start` - Run production server
+- `npm test` - Run tests
 
 ## Architecture
 
-*To be documented once the project architecture is defined*
+### Frontend (React + TypeScript)
+- **Components**: RoleSelector and ChatWindow in `client/src/components/`
+- **WebSocket Service**: Handles real-time communication in `client/src/services/WebSocketService.ts`
+- **Styling**: Dark theme matching the provided UI mockup
+
+### Backend (Node.js + TypeScript)
+- **WebSocket Server**: Manages connections and message routing in `server/src/server.ts`
+- **Pairing Logic**: First-come, first-served pairing of chatbot and user roles
+- **Connection Management**: Handles disconnections and re-pairing
+
+### Testing
+- Client tests use React Testing Library and Jest
+- Server tests use Jest with TypeScript
+- GitHub Actions CI/CD pipeline runs on Node.js 18.x and 20.x
