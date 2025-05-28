@@ -1,9 +1,8 @@
-import { WebSocket } from 'ws';
 import { WebSocketMessage } from '../../../server/src/types';
 
 // Mock WebSocket
 class MockWebSocket {
-  readyState = WebSocket.OPEN;
+  readyState = 1; // WebSocket.OPEN
   messages: string[] = [];
   
   send(data: string) {
@@ -15,7 +14,7 @@ class MockWebSocket {
       this.onmessage({ data } as any);
     }
     if (event === 'close' && this.onclose) {
-      this.onclose({} as any);
+      this.onclose();
     }
   }
   

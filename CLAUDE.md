@@ -37,13 +37,20 @@ This is a Human-Powered Chatbot Application that allows two users to simulate a 
 ### Client Commands
 - `npm start` - Start development server
 - `npm run build` - Build for production
-- `npm test` - Run tests
+- `npm test` - Run tests interactively
+- `npm test -- --watchAll=false` - Run tests once (CI mode)
 
 ### Server Commands
 - `npm run dev` - Start development server with nodemon
 - `npm run build` - Compile TypeScript
 - `npm start` - Run production server
 - `npm test` - Run tests
+
+### Running All Tests
+```bash
+# Run both client and server tests
+cd client && npm test -- --watchAll=false && cd ../server && npm test
+```
 
 ## Architecture
 
