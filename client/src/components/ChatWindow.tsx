@@ -21,9 +21,11 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    wsService.onMessage((message: Message) => {
-      setMessages(prev => [...prev, message]);
-    });
+    if (wsService) {
+      wsService.onMessage((message: Message) => {
+        setMessages(prev => [...prev, message]);
+      });
+    }
   }, [wsService]);
 
   useEffect(() => {

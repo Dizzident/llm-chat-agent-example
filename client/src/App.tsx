@@ -35,12 +35,16 @@ function App() {
     return <RoleSelector onRoleSelect={handleRoleSelect} />;
   }
 
+  if (!wsService) {
+    return <div className="loading">Connecting...</div>;
+  }
+
   return (
     <ChatWindow 
       role={role} 
       isConnected={isConnected}
       isPaired={isPaired}
-      wsService={wsService!}
+      wsService={wsService}
     />
   );
 }
